@@ -1,6 +1,6 @@
 ---
 name: django-starter-project
-description: "Bootstrap a starter Django project with SQLite, built-in authentication, login/logout, django-suit, a modern theme, and modular app structure. Use for new Django scaffolds, starter apps, and project setup workflows."
+description: "Bootstrap a starter Django project with SQLite, built-in authentication, login/logout, a modern theme, and modular app structure. Use for new Django scaffolds, starter apps, and project setup workflows."
 argument-hint: "What should the Django starter be called?"
 ---
 
@@ -20,7 +20,6 @@ A starter project that includes:
 - A supported, stable Python and Django version
 - Local SQLite database configuration
 - Built-in auth with login and logout flows
-- django-suit configured for the admin UI
 - Django's built-in template engine with a shared `base.html`
 - Bootstrap 5 (via `django-bootstrap5`) for layout and components
 - A modern base theme and responsive templates
@@ -50,12 +49,12 @@ A starter project that includes:
 
 ## Procedure
 1. Choose a short, neutral project name that reflects the starter purpose.
-2. Create the virtual environment at `.venv`, activate it, and install Django, `django-bootstrap5`, `django-suit`, and any only-when-needed starter dependencies. Pin them to `requirements.txt`.
-3. Add django-suit if the project includes admin customization, and configure it before first migrations if required by the chosen version.
+2. Create the virtual environment at `.venv`, activate it, and install a stable Django release, `django-bootstrap5`, and any only-when-needed starter dependencies. Pin them to `requirements.txt`.
+3. Use Django's built-in admin with default styling unless a different admin theme is explicitly requested.
 4. Start the project with a modular layout so apps live under a dedicated `apps/` package.
 5. Create a `core` app for the landing page, health check, and general shell views.
 6. Create an `accounts` app for authentication-related pages and URLs.
-7. Configure `settings.py` for SQLite, templates, static files, login redirects, installed apps, and django-suit settings.
+7. Configure `settings.py` for SQLite, templates, static files, login redirects, and installed apps.
 8. Wire root URLs so the project exposes home, login, logout, and any starter pages cleanly.
 9. Add a base template with a modern visual style and shared navigation.
 10. Use built-in Django auth views for login and logout unless there is a clear reason to customize them.
@@ -86,7 +85,6 @@ A starter project that includes:
 ## Theme Guidance
 - Use a modern, restrained aesthetic rather than a default Django look
 - Rely on Bootstrap utility classes and components for spacing, typography, and navigation
-- Use django-suit to give the admin a polished, production-ready look
 - Keep the starter neutral enough that later skills can replace the palette or branding easily
 - Build around reusable blocks in `base.html` so new pages can inherit the same shell
 
@@ -95,7 +93,7 @@ A starter project that includes:
 - Migrations apply cleanly against SQLite
 - A browser can reach the landing page with Bootstrap styles applied
 - Login and logout both work using the built-in auth flow
-- django-suit is installed and the admin renders with the expected theme
+- Django admin renders correctly using the built-in admin app
 - `base.html` blocks are in place and child templates extend correctly
 - The app structure is still modular and ready for future skills to extend
 

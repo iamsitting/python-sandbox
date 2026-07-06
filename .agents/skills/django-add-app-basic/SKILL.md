@@ -8,6 +8,10 @@ argument-hint: "What feature should the new app implement? (e.g. blog, tasks, pr
 
 Add a self-contained feature app to an existing Django project that was created with the `django-starter-project` skill. All structural, naming, and wiring decisions are made automatically based on the feature name provided.
 
+Starter baseline this skill assumes:
+- Stable Django release
+- Bootstrap 5 via `django-bootstrap5`
+
 ## When to Use
 - Extending a `django-starter-project` scaffold with a new feature
 - Adding a CRUD section (list, detail, create, edit, delete) for any model
@@ -21,7 +25,7 @@ This skill makes the following choices automatically:
 - Templates live at `templates/<feature>/` and extend the existing `base.html`
 - URL namespace matches the app label (e.g. `app_name = "blog"`)
 - URLs are mounted at `/<feature>/` in the root URL conf
-- Admin registration uses django-suit-compatible `ModelAdmin` with sensible `list_display`
+- Admin registration uses standard Django `ModelAdmin` with sensible `list_display`
 - No additional packages are installed unless strictly required for the feature
 - Login is required for create, update, and delete views; list and detail are public unless the feature name implies otherwise (e.g. `dashboard`, `profile`, `admin`)
 
@@ -30,7 +34,7 @@ A new `apps/<feature>/` app containing:
 - `models.py` with a primary model and sensible fields inferred from the feature name
 - `views.py` with the five standard generic views
 - `urls.py` with named routes and the app namespace
-- `admin.py` registered and compatible with django-suit
+- `admin.py` registered with standard Django admin
 - `templates/<feature>/` with `list.html`, `detail.html`, `form.html`, and `confirm_delete.html`
 - All templates extending `base.html` and using Bootstrap 5 components
 - App wired into `INSTALLED_APPS` and the root URL conf

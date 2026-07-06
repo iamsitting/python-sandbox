@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Home | Twitter Clone{% endblock %}
+
+{% block content %}
+<section class="hero-shell p-4 p-md-5 rounded-4 overflow-hidden position-relative">
+    <div class="row align-items-center g-4 position-relative z-1">
+        <div class="col-lg-7">
+            <span class="badge text-bg-light border mb-3">Django Starter</span>
+            <h1 class="display-5 fw-bold mb-3">Build your Twitter clone on a clean, modular foundation.</h1>
+            <p class="lead text-secondary mb-4">This scaffold ships with auth, a polished admin, Bootstrap-powered templates, and a project shape built for feature apps.</p>
+            <div class="d-flex flex-wrap gap-2">
+                {% if request.user.is_authenticated %}
+                <span class="btn btn-dark disabled">Signed in as @{{ request.user.username }}</span>
+                {% else %}
+                <a href="{% url 'accounts:login' %}" class="btn btn-dark">Log in</a>
+                {% endif %}
+                <a href="/admin/" class="btn btn-outline-dark">Open admin</a>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="signal-card rounded-4 p-4">
+                <h2 class="h5 fw-semibold mb-3">Starter status</h2>
+                <ul class="list-unstyled mb-0 d-grid gap-2">
+                    <li><span class="status-dot"></span> Core app ready</li>
+                    <li><span class="status-dot"></span> Accounts auth wired</li>
+                    <li><span class="status-dot"></span> SQLite configured</li>
+                    <li><span class="status-dot"></span> Theme shell in place</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="hero-glow"></div>
+</section>
+{% endblock %}
