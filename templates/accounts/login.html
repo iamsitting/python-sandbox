@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 
-{% block title %}Log in | Twitter Clone{% endblock %}
+{% block title %}Log in | Information Systems Portal{% endblock %}
 
 {% block content %}
 <div class="row justify-content-center">
@@ -9,7 +9,7 @@
         <div class="card border-0 shadow-sm rounded-4">
             <div class="card-body p-4 p-md-5">
                 <h1 class="h3 mb-3">Welcome back</h1>
-                <p class="text-secondary mb-4">Sign in to continue building your timeline and features.</p>
+                <p class="text-secondary mb-4">Sign in to continue working in the portal and its features.</p>
                 <form method="post" novalidate>
                     {% csrf_token %}
                     {% bootstrap_form form %}

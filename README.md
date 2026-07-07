@@ -1,6 +1,6 @@
-# Twitter Clone Starter (Django)
+# Information Systems Portal Starter (Django)
 
-A modular Django starter project for building a Twitter clone.
+A modular Django starter project for building an Information Systems Portal.
 
 ## Stack
 - Python 3.12 (via local `.venv`)

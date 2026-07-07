@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
-{% block title %}Home | Twitter Clone{% endblock %}
+{% block title %}Home | Information Systems Portal{% endblock %}
 
 {% block content %}
 <section class="hero-shell p-4 p-md-5 rounded-4 overflow-hidden position-relative">
     <div class="row align-items-center g-4 position-relative z-1">
         <div class="col-lg-7">
             <span class="badge text-bg-light border mb-3">Django Starter</span>
-            <h1 class="display-5 fw-bold mb-3">Build your Twitter clone on a clean, modular foundation.</h1>
-            <p class="lead text-secondary mb-4">This scaffold ships with auth, a polished admin, Bootstrap-powered templates, and a project shape built for feature apps.</p>
+            <h1 class="display-5 fw-bold mb-3">Build your Information Systems Portal on a clean, modular foundation.</h1>
+            <p class="lead text-secondary mb-4">This scaffold ships with authentication, a polished admin, Bootstrap-powered templates, and a project shape built for feature apps.</p>
             <div class="d-flex flex-wrap gap-2">
                 {% if request.user.is_authenticated %}
                 <span class="btn btn-dark disabled">Signed in as @{{ request.user.username }}</span>

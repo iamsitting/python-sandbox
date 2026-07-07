@@ -6,7 +6,7 @@ argument-hint: "What feature should the new app implement? (e.g. blog, tasks, pr
 
 # Django Add App (Basic)
 
-Add a self-contained feature app to an existing Django project that was created with the `django-starter-project` skill. All structural, naming, and wiring decisions are made automatically based on the feature name provided.
+Add a self-contained feature app to an existing Django project that was created with the `django-starter-project` skill. The project is an Information Systems Portal, and the existing `accounts` app remains shared application context. All structural, naming, and wiring decisions are made automatically based on the feature name provided.
 
 Starter baseline this skill assumes:
 - Stable Django release
@@ -16,6 +16,10 @@ Starter baseline this skill assumes:
 - Extending a `django-starter-project` scaffold with a new feature
 - Adding a CRUD section (list, detail, create, edit, delete) for any model
 - Quickly scaffolding a new app without making architectural decisions
+
+## Branding Context
+- Treat the host application as an Information Systems Portal.
+- Keep the `accounts` app and auth flow intact as shared portal context.
 
 ## Assumptions (No User Confirmation Needed)
 This skill makes the following choices automatically:

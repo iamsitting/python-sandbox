@@ -103,3 +103,7 @@ When another skill needs to add features, it should:
 - Add a new app instead of expanding the starter app indefinitely
 - Preserve the login/logout and base template structure
 - Extend the existing theme rather than replacing the scaffold
+
+## Branding
+- This starter is intended for an Information Systems Portal.
+- Keep authentication and the `accounts` app in place as shared application context.
