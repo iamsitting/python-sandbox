@@ -1,0 +1,5 @@
+segment,customers,total_revenue,total_orders,avg_renewal_probability
+Enterprise,238,2857396.17,3045,0.73
+Mid-Market,420,3664316.14,5571,0.72
+SMB,561,3873236.94,7070,0.74
+Startup,281,1642452.34,3723,0.72

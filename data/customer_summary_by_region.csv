@@ -1,0 +1,6 @@
+region,customers,total_revenue,total_orders,avg_satisfaction
+Midwest,300,2490021.58,4027,3.95
+Northeast,326,2462383.25,4019,3.92
+Southeast,293,2268065.47,3762,3.93
+Southwest,301,2422127.37,3792,3.98
+West,280,2394803.92,3809,3.90
