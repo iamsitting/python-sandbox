@@ -10,6 +10,9 @@
     </div>
     {% if request.user.is_authenticated %}
     <div class="d-flex gap-2">
+        {% if dashboard.pk == 1 %}
+        <a class="btn btn-dark" href="{% url 'dashboards:customer-data' dashboard.pk %}">Open customer data test</a>
+        {% endif %}
         <a class="btn btn-outline-secondary" href="{% url 'dashboards:update' dashboard.pk %}">Edit</a>
         <a class="btn btn-outline-danger" href="{% url 'dashboards:delete' dashboard.pk %}">Delete</a>
     </div>

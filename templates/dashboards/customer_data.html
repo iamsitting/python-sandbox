@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block title %}Customer Data | {{ dashboard.name }}{% endblock %}
+
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+    <div>
+        <p class="text-uppercase text-secondary fw-semibold mb-1">Dashboard {{ dashboard.pk }}</p>
+        <h1 class="display-6 mb-0">Customer data test</h1>
+    </div>
+    <div class="d-flex gap-2">
+        <a class="btn btn-outline-dark" href="{% url 'dashboards:detail' dashboard.pk %}">Back to dashboard</a>
+        <a class="btn btn-dark" href="{% url 'dashboards:access' %}">My access</a>
+    </div>
+</div>
+
+{% if csv_missing %}
+<div class="alert alert-warning">The generated customers.csv file was not found in the data folder.</div>
+{% else %}
+<div class="row g-4 mb-4">
+    <div class="col-lg-4">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body">
+                <p class="text-uppercase text-secondary fw-semibold mb-1">Dataset size</p>
+                <h2 class="display-6 mb-0">{{ customer_count }}</h2>
+                <p class="text-secondary mb-0">Rows loaded from customers.csv</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body">
+                <h2 class="h5 mb-3">Customer status mix</h2>
+                <div style="height: 300px;">
+                    <canvas id="statusChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0" id="customerTable">
+                <thead class="table-light">
+                    <tr>
+                        <th>Customer</th>
+                        <th>Company</th>
+                        <th>Region</th>
+                        <th>Segment</th>
+                        <th>Status</th>
+                        <th>Channel</th>
+                        <th>Industry</th>
+                        <th>Orders</th>
+                        <th>Revenue</th>
+                        <th>Satisfaction</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in customer_rows %}
+                    <tr>
+                        <td>
+                            <div class="fw-semibold">{{ row.first_name }} {{ row.last_name }}</div>
+                            <div class="text-secondary small">{{ row.email }}</div>
+                        </td>
+                        <td>{{ row.company }}</td>
+                        <td>{{ row.region }} / {{ row.city }}</td>
+                        <td>{{ row.segment }}</td>
+                        <td>{{ row.status }}</td>
+                        <td>{{ row.channel }}</td>
+                        <td>{{ row.industry }}</td>
+                        <td>{{ row.order_count }}</td>
+                        <td>${{ row.lifetime_value }}</td>
+                        <td>{{ row.satisfaction_score }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    $(function () {
+        {% if not csv_missing %}
+        $('#customerTable').DataTable({
+            pageLength: 10,
+            order: [[8, 'desc']],
+            language: {
+                search: 'Search customers:'
+            }
+        });
+
+        const statusChart = new Chart(document.getElementById('statusChart'), {
+            type: 'bar',
+            data: {
+                labels: {{ status_labels|safe }},
+                datasets: [{
+                    label: 'Customers',
+                    data: {{ status_values|safe }},
+                    backgroundColor: ['#0f172a', '#2563eb', '#f97316']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { precision: 0 }
+                    }
+                }
+            }
+        });
+        {% endif %}
+    });
+</script>
+{% endblock %}
