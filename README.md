@@ -6,7 +6,14 @@ A modular Django starter project for building an Information Systems Portal.
 - Python 3.12 (via local `.venv`)
 - Django 4.2.x (LTS)
 - django-bootstrap5
+- jQuery 3.7.x
+- DataTables 1.13.x (Bootstrap 5 integration)
+- Chart.js 4.x
 - SQLite (`db.sqlite3`)
+
+## Frontend Libraries
+- jQuery, DataTables, and Chart.js are loaded globally from CDN in `templates/base.html`.
+- Child templates can initialize DataTables and charts inside the `extra_js` block.
 
 ## Project Layout
 - `config/` - project settings, root URLs, ASGI/WSGI

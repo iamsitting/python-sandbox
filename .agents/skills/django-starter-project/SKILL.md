@@ -22,6 +22,8 @@ A starter project that includes:
 - Built-in auth with login and logout flows
 - Django's built-in template engine with a shared `base.html`
 - Bootstrap 5 (via `django-bootstrap5`) for layout and components
+- jQuery DataTables for interactive tabular UIs
+- Chart.js for dashboard and reporting visualizations
 - A modern base theme and responsive templates
 - A modular app layout with clear extension points
 
@@ -57,10 +59,11 @@ A starter project that includes:
 7. Configure `settings.py` for SQLite, templates, static files, login redirects, and installed apps.
 8. Wire root URLs so the project exposes home, login, logout, and any starter pages cleanly.
 9. Add a base template with a modern visual style and shared navigation.
-10. Use built-in Django auth views for login and logout unless there is a clear reason to customize them.
-11. Ensure templates exist for the auth flow and that logout returns to a sensible page.
-12. Keep the starter theme self-contained and easy to restyle later.
-13. Run migrations, verify the server starts, and confirm login/logout works end to end.
+10. Include jQuery, DataTables, and Chart.js in `base.html` (CDN is acceptable for starter scaffolds).
+11. Use built-in Django auth views for login and logout unless there is a clear reason to customize them.
+12. Ensure templates exist for the auth flow and that logout returns to a sensible page.
+13. Keep the starter theme self-contained and easy to restyle later.
+14. Run migrations, verify the server starts, and confirm login/logout works end to end.
 
 ## Modularization Rules
 - Keep each future feature in its own app unless it is obviously shared shell behavior
@@ -82,6 +85,12 @@ A starter project that includes:
 - Avoid pinning to the absolute latest Bootstrap minor; use the version recommended by the current `django-bootstrap5` release
 - Keep custom overrides in a project-level `static/css/custom.css` file that is loaded after Bootstrap so it is easy to restyle later
 
+## JavaScript Libraries
+- Include jQuery for broad plugin compatibility in starter templates.
+- Include DataTables (Bootstrap 5 styling) for rich table sorting, filtering, and pagination.
+- Include Chart.js for dashboard-ready chart rendering.
+- Load these in `base.html` so feature apps can opt in with minimal setup.
+
 ## Theme Guidance
 - Use a modern, restrained aesthetic rather than a default Django look
 - Rely on Bootstrap utility classes and components for spacing, typography, and navigation
@@ -95,6 +104,7 @@ A starter project that includes:
 - Login and logout both work using the built-in auth flow
 - Django admin renders correctly using the built-in admin app
 - `base.html` blocks are in place and child templates extend correctly
+- DataTables and Chart.js assets are available from the shared `base.html`
 - The app structure is still modular and ready for future skills to extend
 
 ## Handoff for Future Skills
