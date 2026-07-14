@@ -1,11 +1,12 @@
 from django.urls import path
 
-from .views import DashboardCreateView, DashboardDeleteView, DashboardDetailView, DashboardListView, DashboardUpdateView
+from .views import DashboardAccessView, DashboardCreateView, DashboardDeleteView, DashboardDetailView, DashboardListView, DashboardUpdateView
 
 app_name = 'dashboards'
 
 urlpatterns = [
     path('', DashboardListView.as_view(), name='list'),
+    path('access/', DashboardAccessView.as_view(), name='access'),
     path('create/', DashboardCreateView.as_view(), name='create'),
     path('<int:pk>/', DashboardDetailView.as_view(), name='detail'),
     path('<int:pk>/edit/', DashboardUpdateView.as_view(), name='update'),

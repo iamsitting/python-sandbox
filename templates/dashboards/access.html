@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block title %}My Access | Dashboards{% endblock %}
+
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+    <div>
+        <p class="text-uppercase text-secondary fw-semibold mb-1">Access overview</p>
+        <h1 class="display-6 mb-0">My teams and dashboards</h1>
+    </div>
+    <a class="btn btn-outline-dark" href="{% url 'dashboards:list' %}">Browse all dashboards</a>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-lg-4">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body">
+                <h2 class="h5 mb-3">Your teams</h2>
+                <ul class="list-group list-group-flush">
+                    {% for team in user_teams %}
+                    <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
+                        <span>{{ team.name }}</span>
+                        <span class="badge text-bg-light">{{ team.dashboards.count }} dashboards</span>
+                    </li>
+                    {% empty %}
+                    <li class="list-group-item px-0 text-secondary">You are not currently assigned to any teams.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body">
+                <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
+                    <h2 class="h5 mb-0">Dashboards you can access</h2>
+                    <div class="d-flex align-items-center gap-2">
+                        <label class="form-label mb-0 small text-secondary" for="teamFilter">Filter by team</label>
+                        <select id="teamFilter" class="form-select form-select-sm" style="min-width: 220px;">
+                            <option value="">All teams</option>
+                            {% for team in user_teams %}
+                            <option value="{{ team.name|escape }}">{{ team.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0" id="accessTable">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Name</th>
+                                <th>Title</th>
+                                <th>Teams</th>
+                                <th>Updated</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for dashboard in dashboards %}
+                            <tr data-team-names="{% for team in dashboard.teams.all %}{{ team.name|escape }}{% if not forloop.last %}|||{% endif %}{% endfor %}">
+                                <td class="fw-semibold"><a class="text-decoration-none" href="{% url 'dashboards:detail' dashboard.pk %}">{{ dashboard.name }}</a></td>
+                                <td>{{ dashboard.title }}</td>
+                                <td>
+                                    {% for team in dashboard.teams.all %}
+                                        <span class="badge text-bg-light me-1">{{ team.name }}</span>
+                                    {% empty %}
+                                        <span class="text-secondary">No teams assigned</span>
+                                    {% endfor %}
+                                </td>
+                                <td>{{ dashboard.updated_at|date:'M d, Y' }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    $(function () {
+        const table = $('#accessTable').DataTable({
+            pageLength: 10,
+            order: [[3, 'desc']],
+            language: {
+                search: 'Look up dashboards:',
+                emptyTable: 'No accessible dashboards found.'
+            }
+        });
+
+        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+            if (settings.nTable.id !== 'accessTable') {
+                return true;
+            }
+
+            const selectedTeam = $('#teamFilter').val();
+
+            if (!selectedTeam) {
+                return true;
+            }
+
+            const rowNode = table.row(dataIndex).node();
+            const teamNames = $(rowNode).data('team-names') || '';
+
+            return String(teamNames).split('|||').includes(selectedTeam);
+        });
+
+        $('#teamFilter').on('change', function () {
+            table.draw();
+        });
+    });
+</script>
+{% endblock %}

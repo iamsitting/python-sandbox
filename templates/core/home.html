@@ -12,6 +12,7 @@
             <div class="d-flex flex-wrap gap-2">
                 {% if request.user.is_authenticated %}
                 <span class="btn btn-dark disabled">Signed in as @{{ request.user.username }}</span>
+                <a href="{% url 'dashboards:access' %}" class="btn btn-outline-dark">Open my access</a>
                 {% else %}
                 <a href="{% url 'accounts:login' %}" class="btn btn-dark">Log in</a>
                 {% endif %}
