@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block title %}{% if object %}Edit{% else %}Create{% endif %} Dashboard | Information Systems Portal{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-4 p-md-5">
+                <p class="text-uppercase text-secondary fw-semibold mb-1">Dashboards</p>
+                <h1 class="h3 mb-4">{% if object %}Edit{% else %}Create{% endif %} dashboard</h1>
+                <form method="post">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    <div class="d-flex gap-2 mt-4">
+                        <button class="btn btn-dark" type="submit">Save</button>
+                        <a class="btn btn-outline-secondary" href="{% url 'dashboards:list' %}">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

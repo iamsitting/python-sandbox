@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ dashboard.name }} | Dashboards{% endblock %}
+
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+    <div>
+        <p class="text-uppercase text-secondary fw-semibold mb-1">Dashboard record</p>
+        <h1 class="display-6 mb-0">{{ dashboard.name }}</h1>
+    </div>
+    {% if request.user.is_authenticated %}
+    <div class="d-flex gap-2">
+        <a class="btn btn-outline-secondary" href="{% url 'dashboards:update' dashboard.pk %}">Edit</a>
+        <a class="btn btn-outline-danger" href="{% url 'dashboards:delete' dashboard.pk %}">Delete</a>
+    </div>
+    {% endif %}
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-8">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body">
+                <h2 class="h5">Overview</h2>
+                <dl class="row mb-0">
+                    <dt class="col-sm-3">Name</dt>
+                    <dd class="col-sm-9">{{ dashboard.name }}</dd>
+                    <dt class="col-sm-3">Title</dt>
+                    <dd class="col-sm-9">{{ dashboard.title }}</dd>
+                    <dt class="col-sm-3">Description</dt>
+                    <dd class="col-sm-9">{{ dashboard.description|default:'No description provided.' }}</dd>
+                    <dt class="col-sm-3">Created</dt>
+                    <dd class="col-sm-9">{{ dashboard.created_at }}</dd>
+                    <dt class="col-sm-3">Updated</dt>
+                    <dd class="col-sm-9">{{ dashboard.updated_at }}</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-body">
+                <h2 class="h5">Teams</h2>
+                <ul class="list-group list-group-flush">
+                    {% for team in dashboard.teams.all %}
+                    <li class="list-group-item px-0 d-flex justify-content-between align-items-center">
+                        <span>{{ team.name }}</span>
+                        <span class="badge text-bg-light">{{ team.users.count }} users</span>
+                    </li>
+                    {% empty %}
+                    <li class="list-group-item px-0 text-secondary">This dashboard is not assigned to any teams.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
