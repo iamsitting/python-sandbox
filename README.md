@@ -4,7 +4,7 @@ A modular Django starter project for building an Information Systems Portal.
 
 ## Stack
 - Python 3.12 (via local `.venv`)
-- Django 4.2.x (LTS)
+- Django 5.2.x (LTS)
 - django-bootstrap5
 - jQuery 3.7.x
 - DataTables 1.13.x (Bootstrap 5 integration)

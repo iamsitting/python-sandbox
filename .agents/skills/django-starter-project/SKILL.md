@@ -17,7 +17,7 @@ Create a clean, modular Django starter that is ready for future features.
 
 ## Output
 A starter project that includes:
-- A supported, stable Python and Django version
+- A supported, stable Python and Django 5.2 LTS version
 - Local SQLite database configuration
 - Built-in auth with login and logout flows
 - Django's built-in template engine with a shared `base.html`
@@ -51,7 +51,7 @@ A starter project that includes:
 
 ## Procedure
 1. Choose a short, neutral project name that reflects the starter purpose.
-2. Create the virtual environment at `.venv`, activate it, and install a stable Django release, `django-bootstrap5`, and any only-when-needed starter dependencies. Pin them to `requirements.txt`.
+2. Create the virtual environment at `.venv`, activate it, and install Django 5.2 LTS, `django-bootstrap5`, and any only-when-needed starter dependencies. Pin them to `requirements.txt`.
 3. Use Django's built-in admin with default styling unless a different admin theme is explicitly requested.
 4. Start the project with a modular layout so apps live under a dedicated `apps/` package.
 5. Create a `core` app for the landing page, health check, and general shell views.
